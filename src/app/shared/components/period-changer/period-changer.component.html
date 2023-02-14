@@ -1,0 +1,91 @@
+<div class="m-auto text-center" [ngStyle]="{'width': '221px'}">
+    <div class="d-flex justify-content-center mt-4">
+        <button 
+            [ngStyle]="{'width': '38px'}"
+            [disabled]="isOutOf(-1)"
+            (click)="changePeriod(-1)" 
+            class="btn blue-hover" 
+            [title]="getPeriodChangerTitle(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    
+        <div 
+            class="text-center mx-2 blue-hover"
+            [ngStyle]="{'width': '145px'}"
+            (click)="scrollToActiveMonth()" 
+            role="button"
+            title="Dátum választás"
+            data-bs-toggle="modal" 
+            data-bs-target="#test-modal">
+            <h4 class="mb-0">
+                {{ dateService.getActiveMontname() }}
+            </h4>
+            <small>
+                {{ dateService.getActiveYear() }}
+            </small>
+        </div>
+        <button 
+            [ngStyle]="{'width': '38px'}" 
+            (click)="changePeriod(1)" 
+            [disabled]="isOutOf(1)"
+            class="btn blue-hover" 
+            [title]="getPeriodChangerTitle(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<hr class="m-auto mt-1 mb-3">
+
+
+<div class="modal fade" 
+    id="test-modal"
+    data-bs-backdrop="static" 
+    data-bs-keyboard="false"
+    tabindex="-1" 
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-0">
+            <div class="modal-body">
+                <h5 class="mb-5 text-success">Hónap választás</h5>
+                <div>
+                    <div class="d-flex justify-content-center text-center">
+                        <div class="mx-2 month-container" id="month-list">
+                            <div *ngFor="let month of monthList; let i = index;" class="mb-2" [id]="'month-' + i">
+                                <p
+                                    role="button" 
+                                    (click)="selectedMonthIndex = i" 
+                                    class="my-2 blue-hover"
+                                    [ngClass]="{'fw-bold dodger-blue active-month': selectedMonthIndex == i}">
+                                    {{ month }}
+                                </p>
+                                <hr *ngIf="monthList.length - 1 != i" class="m-auto">
+                            </div>
+                        </div>
+
+                        <div class="mx-2 month-container" id="year-list">
+                            <div *ngFor="let year of range(); let i = index;" class="mb-2" [id]="'year-' + year">
+                                <p 
+                                    role="button" 
+                                    (click)="selectedYear = year" 
+                                    class="my-2 blue-hover"
+                                    [ngClass]="{'fw-bold dodger-blue active-year': selectedYear == year}">
+                                    {{ year }}
+                                </p>
+                                <hr *ngIf="range().length - 1 != i" class="m-auto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn text-secondary" data-bs-dismiss="modal">
+                    Bezár
+                </button>
+                <button type="button" class="btn text-success" data-bs-dismiss="modal" (click)="setPeriodOnSave()">
+                    Mentés
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

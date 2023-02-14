@@ -1,0 +1,26 @@
+<div class="position-absolute start-50 translate-middle top-50">
+    <div class="card shadow">
+        <div class="card-header text-center bg-dark text-white">
+            <h6>
+                <i class="fas fa-comments-dollar me-1"></i>
+                BEJELENTKEZÉS
+            </h6>
+        </div>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+                <div class="position-relative mb-3">
+                    <i class="fas fa-user-circle position-absolute fs-5"></i>
+                    <input type="text" formControlName="username" class="form-control bg-light-grey border-0">
+                </div>
+
+                <div class="position-relative">
+                    <i class="fas fa-lock position-absolute fs-5"></i>
+                    <input type="password" formControlName="password" class="form-control bg-light-grey border-0">
+                </div>
+            </div>
+            <div class="card-footer text-center bg-transparent border-0">
+                <button [disabled]="!formGroup.valid" type="submit" class="btn bg-black w-100 text-white border-0">LOGIN</button>
+            </div>
+        </form>
+    </div>
+</div>

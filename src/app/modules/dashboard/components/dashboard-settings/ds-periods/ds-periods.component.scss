@@ -1,0 +1,19 @@
+* {
+    transition: 0.2s ease-in;
+}
+
+select {
+    width: 85px !important;
+    border: none;
+}
+
+button {
+    background: white;
+    border: 0;
+    width: 87px;
+}
+
+button:focus,
+button:active {
+    border: 0 white !important;
+}

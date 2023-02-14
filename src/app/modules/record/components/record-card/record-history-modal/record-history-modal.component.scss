@@ -1,0 +1,12 @@
+tbody tr td {
+    display: flex;
+    justify-content: space-between;
+
+    strong {
+        margin-right: 5px;
+    }
+}
+
+table {
+    width: 100% !important;
+}

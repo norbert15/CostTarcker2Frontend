@@ -1,0 +1,31 @@
+<div [style.width.px]="width" id="sidebar" class="text-white position-sticky top-0 vh-100 text-nowrap">
+    <div class="text-center sidebar-header">
+        {{ name }}
+        <i class="show-close d-none text-white fas fa-times text-end fs-4" 
+            (click)="setupSidebarOnMobil()" role="button">
+        </i>
+        <hr>
+    </div>
+
+    <div class="pe-3 ps-1 mt-5 pt-5">
+        <div *ngFor="let menu of menuList">
+            <a [routerLinkActive]="'fw-bold menu-active'"
+                [routerLink]="[menu.routerLink]"
+                [routerLinkActiveOptions]="{exact:true}"
+                (click)="setupSidebarOnMobil()"
+                class="btn text-white-50">
+                {{ menu.name }}
+            </a>
+        </div>
+    </div>
+    
+    <div class="position-absolute bottom-0 mb-2 w-100">
+        <hr class="w-100">
+        <div class="ps-4">
+            <a (click)="logout()" class="btn text-white">
+                <i class="fas fa-sign-out-alt me-1"></i>
+                Kijelentkezés
+            </a>
+        </div>
+    </div>
+</div>

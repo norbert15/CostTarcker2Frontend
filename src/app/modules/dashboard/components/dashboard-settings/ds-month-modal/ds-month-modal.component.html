@@ -1,0 +1,52 @@
+<div class="modal fade" 
+    id="active-month-modal"
+    data-bs-backdrop="static" 
+    data-bs-keyboard="false"
+    tabindex="-1" 
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-0">
+            <div class="modal-body">
+                <h5 class="mb-4 text-success">Aktív időszakok beállítása</h5>
+
+                <div class="mb-4">
+                    <select 
+                        class="form-select text-center"
+                        [disabled]="!dsMonthService.isYearOn"
+                        [(ngModel)]="selectedYear"
+                        [title]="!dsMonthService.isYearOn ? 'Az éves kimutatások beállítása nem elérhető!': ''">
+                        <option 
+                            *ngFor="let year of range()" 
+                            [value]="year" 
+                            [selected]="dsMonthService.activeYear == year">
+                            {{ year }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="row" 
+                    [ngClass]="{'text-disabled': !dsMonthService.isYearOn}"
+                    [title]="!dsMonthService.isYearOn ? 'Az évess kimutatások beállítása nem elérhető!': ''">
+                    <div *ngFor="let month of monthsList; let i = index;"
+                        class="col-6 ps-sm-5 ps-3">
+                        <input [id]="month | lowercase"
+                            [disabled]="!dsMonthService.isYearOn"
+                            (click)="setMonthList(month)" 
+                            type="checkbox" 
+                            class="me-3 checkbox"
+                            [checked]="isInActive(month)">
+                        <label [for]="month | lowercase">{{ month }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn text-secondary" data-bs-dismiss="modal" (click)="reset()">
+                    Bezár
+                </button>
+                <button type="button" class="btn text-success" data-bs-dismiss="modal" (click)="setOnSave()">
+                    Mentés
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

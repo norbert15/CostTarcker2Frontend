@@ -1,0 +1,13 @@
+<div class="row g-0 mx-2">
+    <!-- Aktív időszakok -->
+    <cost-tracker-ds-periods class="col-12 col-sm-6 mt-3 px-2"></cost-tracker-ds-periods>
+    <!-- Aktív időszakok -->
+
+    <!-- Aktív diagrammok -->
+    <cost-tracker-ds-charts class="col-12 col-sm-6 mt-3 px-2"></cost-tracker-ds-charts>
+    <!-- /Aktív diagrammok -->
+</div>
+
+<cost-tracker-ds-month-modal
+    (periodChangeEmit)="periodChangeEmit.emit(true)"
+></cost-tracker-ds-month-modal>

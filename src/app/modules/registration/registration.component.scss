@@ -1,0 +1,28 @@
+.card {
+    border: 2px solid rgb(27, 26, 26);
+    max-width: 600px;
+    width: 100%;
+}
+
+button {
+    width: 150px;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+img {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media(max-width: 350px) {
+    button {
+        width: 100% !important;
+    }
+}
