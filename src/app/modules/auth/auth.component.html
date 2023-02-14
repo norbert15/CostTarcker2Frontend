@@ -17,7 +17,11 @@
                     <i class="fas fa-lock position-absolute fs-5"></i>
                     <input type="password" formControlName="password" class="form-control bg-light-grey border-0">
                 </div>
+
+                <p class="mt-4">Még nincs fiókod? Regisztrálj <a [routerLink]="'/registration'">itt!</a></p>
             </div>
+
+
             <div class="card-footer text-center bg-transparent border-0">
                 <button [disabled]="!formGroup.valid" type="submit" class="btn bg-black w-100 text-white border-0">LOGIN</button>
             </div>

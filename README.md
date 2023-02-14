@@ -1,27 +1,89 @@
-# CostTracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.8.
+# Költségkövető
 
-## Development server
+A program egy költségkövető weboldalt reprezentál, mely a felhasználó nyomon követheti a pénzmozgásait (kiadások és bevételek) havi és éves bontásban. A kiadások és bevételek kategóriákra bontható, mely megkönyíti a pénzmozgások nyomon követését, valamint teljesen személyre szabható is. 
+A program használatához szükséges egy felhasználói fiók. Amit az oldalon történő regisztráció biztosít.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Regisztrációhoz szükséges adatok:**
 
-## Code scaffolding
+- **Felhasználónév**
+- **E-mail cím**
+- **Vezetéknév**
+- **Keresztnév**
+- **Jelszó**
+- **Jelszó megerősítése**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Regisztráció után a felhasználó a login oldalra kerül, ahol a regisztráció során megadott felhasználónév és jelszó párossal tud bejelentkezni.
 
-## Build
+# Fő funkciók
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**1. Kiadások és bevételek rögzítése:**
 
-## Running unit tests
+Alapértelmezetten 6 költség és 2 bevétel kategóriával rendelkeznek a felhasználók.
+A kiválasztott kategóriára kattintva 2 mező megadására van lehetőség:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Összeg:** a rögzítésre szánt összeg
+- **Megjegyzés**: (Opcionális) egy rövid megjegyzés
 
-## Running end-to-end tests
+**2. Új kategória léterhozása**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Kategória léterhozásakor a következő mezőket kell megadni:
 
-## Further help
+- **Kategória megnevezése**
+- **Kategória színének kiválasztása**
+- **Kategória ikonjának kiválasztása**
+- **Kategória tipusának kiválasztáa**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**3. Kategóriák szerkesztése/törlése**
+
+Alapértelmezett kategóriát szerkeszteni/törölni nem lehetséges. Az újonnan felvett kategóriák már szerkeszthetőek vagy törölhetőek. Szerkesztés során ugyan azok a mezőket kell megadni melyeket létrehozás során.
+
+**3. Kategóriák előzményei**
+
+A kategóriák előzmenyei visszatekinthető az adothónapra vonatkozóan.
+
+**4. Időszak választás**
+
+A kiadások és bevételek rögzítése az adott kiválasztott hónapra vonatkozik. Az időszak kiválasztásakor lehetőség van hónapokok váltogatására, valamint az év kiválasztására is.
+
+
+**5. Felhasználói adatok módosítása**
+
+A felhasználói adatok módosítása során a következő adatokat lehet módosítani:
+
+- **E-mail cím**
+- **Felhasználónév**
+- **Vezetéknév**
+- **Keresztnév**
+
+Jelszó módosításhoz szükséges mezők:
+
+- **Régi jelszó**
+- **Új jelszó**
+- **Új jelszó megerősítése**
+
+**6. Kimutatások testreszabása**
+
+A kimutatások oldalon testreszabható, hogy mit szeretnénk látni. 
+Az aktív időszakoknál a következőket lehet beállítani a megjelenítéshez/elrejtéshez:
+
+- **Éves**: Éves kimutatások be/kikapcsolása
+    - **Év**: év kiválasztása (kikapcsolt állapotban nem állitható be)
+    - **Hónapok**: éves kimutatáshoz szüksgés hónapok figyelembe vétele (kikapcsolt állapotban nem állitható be)
+- **Havi**: Havi kimutatások be/kikapcsolása
+
+Az aktív diagrammoknál lehet beállítani a havi vagy éves diagrammok megjelenését
+
+- **Havi/Éves**: 
+    - **Kiadás**: Havi kimutatésok be/kikapcsolása
+    - **Éves**: Éves kimutatésok be/kikapcsolása
+
+# A program használatához szükséges programok
+
+A program futtatáshoz szükséges telepíteni:
+
+- **Node.js 14.18.0-ás verziója**
+- **Angular CLI 12.2.0-ás verziója**
+- **Rest API telepítése: https://github.com/norbert15/cost-tracker2-backend**
+
+A telepített programok után a projekt fő könyvtárában telepíteni kell az alkalmazáshoz szükséges csomagokat: **npm install**
