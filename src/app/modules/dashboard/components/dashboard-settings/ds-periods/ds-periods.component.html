@@ -1,0 +1,63 @@
+<div class="card shadow border-0">
+    <div class="card-body">
+        
+        <div class="d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#ds-periods" role="button">
+            <p class="fw-bold small mb-0">Aktív időszakok:</p>
+            <i class="fas fa-chevron-down" [ngStyle]="{'margin-top': '3px'}"></i>
+        </div>
+
+        <div class="collapse mt-3 row" id="ds-periods">
+            
+            <!-- Felbontások -->
+            <div class="col-6">
+                <div class="ms-sm-2 position-relative">
+                    <span class="me-2">Éves:</span>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" checked (click)="setYearInOn()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+        
+                <div class="ms-sm-2 position-relative">
+                    <span class="me-2">Havi:</span>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" checked (click)="setMonthInOn()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- /Felbontások -->
+
+            <!-- Időszakok -->
+            <div class="col-6">
+                <div class="ms-sm-2">
+                    <button [disabled]="!dsService.isYearOn" 
+                        class="p-0 d-flex justify-content-between" 
+                        data-bs-target="#active-month-modal" 
+                        data-bs-toggle="modal" 
+                        title="Aktív hónapok beállítása">
+                        <span class="text-start me-1">Év:</span>
+                        <strong>{{ dsService.activeYear }}</strong>
+                        <i [ngStyle]="{'font-size': '12px', 'margin-top': '6.5px'}" class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+        
+                <div class="ms-sm-2">
+                    <button [disabled]="!dsService.isYearOn" 
+                        class="p-0 d-flex justify-content-between" 
+                        data-bs-target="#active-month-modal" 
+                        data-bs-toggle="modal" 
+                        title="Aktív hónapok beállítása">
+                        <span>Hónapok:</span>
+                        <i [ngStyle]="{'font-size': '12px', 'margin-top': '6.5px'}" class="fas fa-chevron-down ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /Időszakok -->
+        </div>
+    </div>
+</div>

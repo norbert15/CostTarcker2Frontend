@@ -1,0 +1,100 @@
+<div class="card border-0 shadow">
+    <div class="card-body">
+        <h3 class="mt-3 mb-5">
+            <strong>
+                <i class="fas fa-user me-2"></i>
+                Felhasználói adatok
+            </strong>
+        </h3>
+
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- E-mail cím -->
+                <div class="col-12 col-sm-5 pt-2 mb-3">
+                    <strong class="text-muted">E-mail cím:</strong>
+                </div>
+                <div class="col-12 col-sm-7 mb-3">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        class="form-control bg-light-grey"
+                        formControlName="email"
+                        (input)="isEmailExists = false"
+                        [ngClass]="(isInvalid('email') || isEmailExists) ? 'border-danger' : 'border-0'">
+
+                    <div *ngIf="isInvalid('email')" class="text-end text-danger small">
+                        <small>*Az e-mail cím formátum helytelen!</small>
+                    </div>
+
+                    <div *ngIf="isEmailExists" class="text-end text-danger small">
+                        <small>*Az e-mail cím már foglalt!</small>
+                    </div>
+                </div>
+                <!-- /E-mail cím -->
+
+                <!-- Felhasználónév -->
+                <div class="col-12 col-sm-5 pt-2 mb-3">
+                    <strong class="text-muted">Felhasználónév:</strong>
+                </div>
+                <div class="col-12 col-sm-7 mb-3">
+                    <input 
+                        type="text" 
+                        id="username" 
+                        formControlName="username"
+                        class="form-control bg-light-grey" 
+                        (input)="isUsernameExists = false"
+                        [ngClass]="(isInvalid('username') || isUsernameExists) ? 'border-danger' : 'border-0'">
+
+                    <div *ngIf="isInvalid('username')" class="text-end text-danger small">
+                        <small>*Minimum 5 karakter!</small>
+                    </div>
+
+                    <div *ngIf="isUsernameExists" class="text-end text-danger small">
+                        <small>*A felhasználónév már foglalt!</small>
+                    </div>
+                </div>
+                <!-- /Felhasználónév -->
+
+                <!-- Vezetéknév -->
+                <div class="col-12 col-sm-5 pt-2 mb-3">
+                    <strong class="text-muted">Vezetéknév:</strong>
+                </div>
+                <div class="col-12 col-sm-7 mb-3">
+                    <input 
+                        type="text" 
+                        id="last-name" 
+                        formControlName="lastName"
+                        class="form-control bg-light-grey" 
+                        [ngClass]="isInvalid('lastName') ? 'border-danger' : 'border-0'">
+
+                    <div *ngIf="isInvalid('lastName')" class="text-end text-danger small">
+                        <small>*Minimum 3 karakter!</small>
+                    </div>
+                </div>
+                <!-- /Vezetéknév -->
+    
+                <!-- Keresztnév -->
+                <div class="col-12 col-sm-5 pt-2 mb-3">
+                    <strong class="text-muted">Keresztnév:</strong>
+                </div>
+                <div class="col-12 col-sm-7 mb-3">
+                    <input 
+                        type="text" 
+                        id="first-name" 
+                        class="form-control bg-light-grey" 
+                        formControlName="firstName"
+                        [ngClass]="isInvalid('firstName') ? 'border-danger' : 'border-0'">
+
+                    <div *ngIf="isInvalid('firstName')" class="text-end text-danger small">
+                        <small>*Minimum 3 karakter!</small>
+                    </div>
+                </div>
+                <!-- /Keresztnév -->
+            </div>
+
+            <div class="mt-4 text-end">
+                <button type="submit" class="btn btn-success" [disabled]="!formGroup.valid">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>

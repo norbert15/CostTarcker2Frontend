@@ -1,0 +1,150 @@
+<div class="d-flex justify-content-center mt-5 pt-5 px-2">
+    <div class="card shadow">
+        <div class="card-header text-center bg-dark text-white">
+            <h6>
+                <i class="fas fa-comments-dollar me-1"></i>
+                REGISZTRÁCIÓ
+            </h6>
+        </div>
+        
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+                <div class="row">
+                    <!-- E-amil cím mező -->
+                    <div class="col-12 col-sm-6 my-3">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-at me-1"></i>
+                            E-mail cím
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-control bg-light-grey" 
+                            formControlName="email"
+                            (input)="isEmailExists = false"
+                            [ngClass]="(isInvalid('email') && isTouched('email') || isEmailExists) ? 'border-danger' : 'border-0'">
+    
+                        <div *ngIf="formGroup.get('email')?.errors?.inValidEmail && isTouched('email')" class="text-danger text-end small">
+                            <small>*Az email cím helytelen formátumu!</small>
+                        </div>
+
+                        <div *ngIf="isEmailExists" class="text-danger text-end small">
+                            <small>*Az e-mail cím már foglalt!</small>
+                        </div>
+                    </div>
+                    <!-- /E-amil cím mező -->
+
+                    <!-- Felhasználónév mező -->
+                    <div class="col-12 col-sm-6 my-sm-3 mb-3">
+                        <label for="username" class="form-label">
+                            <i class="fas fa-user-circle me-1"></i>
+                            Felhasználónév
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username"
+                            class="form-control bg-light-grey"
+                            formControlName="username"
+                            (input)="isUsernameExists = false"
+                            [ngClass]="(isMinLengthInvalid('username') && isTouched('username') || isUsernameExists) ? 'border-danger' : 'border-0'">
+
+                        <div *ngIf="isMinLengthInvalid('username') && isTouched('username')" class="text-danger text-end small">
+                            <small>*Minimum 5 karakter!</small>
+                        </div>
+
+                        <div *ngIf="isUsernameExists" class="text-danger text-end small">
+                            <small>*A felhasználónév már foglalt!</small>
+                        </div>
+                    </div>
+                    <!-- /Felhasználónév mező -->
+
+                    <!-- Vezetéknév mező -->
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="lastName" class="form-label">
+                            <i class="fas fa-user me-1"></i>
+                            Vezetéknév
+                        </label>
+                        <input 
+                            type="text" 
+                            id="lastName"
+                            class="form-control bg-light-grey"
+                            formControlName="lastName" 
+                            [ngClass]="isMinLengthInvalid('lastName') && isTouched('lastName') ? 'border-danger' : 'border-0'">
+    
+                        <div *ngIf="isMinLengthInvalid('lastName') && isTouched('lastName')" class="text-danger text-end small">
+                            <small>*Minimum 3 karakter!</small>
+                        </div>
+                    </div>
+                    <!-- Vezetéknév mező -->
+                    
+                    <!-- Keresztnév mező -->
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="firstName" class="form-label">
+                            <i class="fas fa-user me-1"></i>
+                            Keresztnév
+                        </label>
+                        <input 
+                            type="text" 
+                            id="firstName"
+                            class="form-control bg-light-grey"
+                            formControlName="firstName"
+                            [ngClass]="isMinLengthInvalid('firstName') && isTouched('firstName') ? 'border-danger' : 'border-0'">
+    
+                        <div *ngIf="isMinLengthInvalid('firstName') && isTouched('firstName')" class="text-danger text-end small">
+                            <small>*Minimum 3 karakter!</small>
+                        </div>
+                    </div>
+                    <!-- /Keresztnév mező -->
+
+                    <!-- Jelszó mező -->
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="password" class="form-label">
+                            <i class="fas fa-lock me-1"></i>
+                            Jelszó
+                        </label>
+                        <input 
+                            type="password" 
+                            id="password"
+                            class="form-control bg-light-grey"
+                            formControlName="password"
+                            [ngClass]="isMinLengthInvalid('password') && isTouched('password') ? 'border-danger' : 'border-0'">
+
+                        <div *ngIf="isMinLengthInvalid('password') && isTouched('password')" class="text-danger text-end small">
+                            <small>*Minimum 5 karakter!</small>
+                        </div>
+                    </div>
+                    <!-- /Jelszó mező -->
+                    <div class="col-12 col-sm-6 mb-3">
+                        <label for="confirmPassword" class="form-label">
+                            <i class="fas fa-lock me-1"></i>
+                            Jelszó megerősítése
+                        </label>
+                        <input 
+                            type="password" 
+                            id="confirmPassword"
+                            class="form-control bg-light-grey"
+                            formControlName="confirmPassword"
+                            [ngClass]="isMinLengthInvalid('confirmPassword') && isTouched('confirmPassword') ? 'border-danger' : 'border-0'">
+
+                        <div *ngIf="isTouched('confirmPassword')" class="text-danger text-end small">
+                            <small *ngIf="isMinLengthInvalid('confirmPassword')">*Minimum 5 karakter! <br/></small>
+                            <small *ngIf="formGroup.get('confirmPassword')!.errors?.notSamePassword">*A jelszavak nem egyeznek meg!</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 mb-3 form-check">
+                    <input (click)="isChecked = !isChecked" type="checkbox" id="data-guard" class="form-check-input me-2">
+                    <label for="data-guard" class="form-check-label">Adatvédelmi nyilatkozat elfogadása</label>
+
+                </div>
+                
+                <p class="mb-4">Már van fiókod? Lépj be <a [routerLink]="'/login'">itt!</a></p>
+
+                <div>
+                    <button type="submit" class="btn btn-success" [disabled]="!formGroup.valid || !isChecked">Regisztráció</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

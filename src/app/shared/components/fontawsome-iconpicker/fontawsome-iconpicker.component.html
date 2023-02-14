@@ -1,0 +1,16 @@
+<div class="position-relative">
+    <div>
+        <button class="btn bg-light-grey p-0 px-2 py-1" data-bs-toggle="collapse" data-bs-target="#icon-items">
+            <i role="button" class="rounded-pill text-black text-center p-2" [ngClass]="recordService.getActiveRecordIcon()"></i>
+        </button>
+    </div>
+
+    <!-- Ikonok listája -->
+    <div class="collapse position-absolute bg-white z-index-1 icon-items row g-0 mx-3" id="icon-items">
+        <ng-container *ngFor="let icon of iconList; let i = index">
+            <p class="icon-item mx-1 mb-2 col" role="button">
+                <i class="text-center" (click)="recordService.setActiveRecordIcon(icon)" [ngClass]="icon"></i>
+            </p>
+        </ng-container>
+    </div>
+</div>

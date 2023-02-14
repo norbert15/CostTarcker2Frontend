@@ -1,0 +1,28 @@
+#sidebar {
+    overflow: hidden;
+    transition: 0.4s;
+    background-color: rgb(25, 25, 25);
+}
+
+.menu-active {
+    color: white !important;
+}
+
+.sidebar-header {
+    padding-top: 13.8px;
+}
+
+@media (max-width: 760px) {
+    #sidebar {
+        z-index: 10 !important;
+        position: fixed !important;
+        text-align: center !important;
+    }
+
+    .show-close {
+        display: block !important;
+        position: absolute;
+        right: 15px;
+        top: 18px; 
+    }
+}

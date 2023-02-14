@@ -1,0 +1,32 @@
+<div class="card shadow border-0">
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#ds-charts" role="button">
+            <p class="fw-bold small mb-0">Aktív diagrammok:</p>
+            <i class="fas fa-chevron-down" [ngStyle]="{'margin-top': '3px'}"></i>
+        </div>
+
+        <div class="collapse mt-3" id="ds-charts">
+            <div class="row">
+                <div *ngFor="let period of periods" class="col-6">
+                    <p class="ms-sm-2 mb-0">{{ period }}:</p>
+                    <div class="row">
+                        <div class="d-inline ms-sm-3 ps-3" *ngFor="let type of chartTypes">
+                            <div class="d-flex">
+                                <div class="position-relative" [ngStyle]="{'width': '30px', 'height': '17px'}">
+                                    <div class="switch-container">
+                                        <label class="switch">
+                                            <input (click)="setType(type, period)" type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <span class="ms-2">{{ type | titlecase }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div>
+    <!-- Hónap választó -->
+    <cost-tracker-period-changer (changePeriodEmit)="getRecords()"></cost-tracker-period-changer>
+    <!-- /Hónap választó -->
+
+    <!-- Összeg -->
+    <cost-tracker-record-sum [sum]="sum"></cost-tracker-record-sum>
+    <!-- /Összeg -->
+
+    <!-- Kategóriák listája -->
+    <div class="row g-0 justify-content-center" >
+        <cost-tracker-record-card *ngFor="let data of recordsWithCategories"
+            class="record-card col-12 col-sm-6 col-md-4 col-lg-4 m-2"
+            [category]="data.category"
+            [value]="data.sum"
+            [sumValue]="sum"
+            [isDefault]="data.category.userId == 0"
+            (saveEmit)="getRecords()"
+            [records]="data.records">
+        </cost-tracker-record-card>
+        <cost-tracker-category-modal (createEmit)="getRecords();" class="record-card col-12 col-sm-6 col-md-4 col-lg-4 m-2"></cost-tracker-category-modal>
+    </div>
+    <!-- /Kategóriák listája -->
+
+    <!-- Kördiagram -->
+    <div>
+        <cost-tracker-record-pipechart [setSum]="sum" [setChartData]="recordsWithCategories"></cost-tracker-record-pipechart>
+    </div>
+    <!-- /Kördiagram -->
+</div>

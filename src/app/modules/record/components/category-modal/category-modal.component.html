@@ -1,0 +1,59 @@
+<div *ngIf="!category" class="card card-body" role="button" data-bs-toggle="modal" data-bs-target="#create-record">
+    <div class="card-content">
+        <!-- <i class="fas fa-plus rounded-pill border-dark border p-2 me-2"></i> -->
+        <i class="fas fa-plus-circle me-2"></i>
+        <small>Új kategória létrehozása</small>
+    </div>
+</div>
+
+<div class="modal fade" 
+    [id]="category ? 'edit-' + category.id : 'create-record'" 
+    data-bs-backdrop="static" 
+    data-bs-keyboard="false"
+    tabindex="-1" 
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-0">
+            <form (onsubmit)="saveCategory()" [formGroup]="categoryFormGroup">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white">
+                        {{ !category ? 'Új kategória létrehozása' : category.name + ' szerkesztése' }}
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                       <label for="categoryName" class="form-label">Kategória megnevezése</label>
+                       <input type="text" formControlName="name" id="categoryName" class="form-control bg-light-grey">
+                    </div>
+    
+                    <div class="mb-2">
+                        <label for="color" class="form-label">Kategória színe</label>
+                        <input type="color" formControlName="color" id="color" class="form-control">
+                    </div>
+    
+                    <div class="mb-2">
+                        <label class="form-label">Kategória ikonja</label>
+                        <cost-tracker-fontawsome-iconpicker></cost-tracker-fontawsome-iconpicker>
+                    </div>  
+    
+                    <div class="mb-2">
+                        <label for="type" class="form-label">Kategória tipusa</label>
+                        <select id="type" class="form-select" formControlName="type">
+                            <option value="1" [attr.selected]="getCategoryTypeByUrl() == 1 ? true : null">Kiadás</option>
+                            <option value="2" [attr.selected]="getCategoryTypeByUrl() == 2 ? true : null">Bevétel</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="w-100 btn bg-secondary text-white" data-bs-dismiss="modal" (click)="initForm()">
+                        Bezár
+                    </button>
+                    <button type="submit" class="w-100 btn btn-success"  
+                        data-bs-dismiss="modal" [disabled]="!categoryFormGroup.valid" (click)="saveCategory()">
+                        Mentés
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

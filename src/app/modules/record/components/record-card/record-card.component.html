@@ -1,0 +1,85 @@
+<div>
+    <div 
+        class="card shadow border-0" 
+        role="button" 
+        [onHover]="'0 .5rem 1rem ' + category.color"
+        data-bs-toggle="modal" 
+        [attr.data-bs-target]="'#' + category.name + '-' + category.id">
+        <div class="card-body">
+            <div class="mb-3 position-relative">
+                <i [ngStyle]="{'background': category.color}"
+                    [ngClass]="category.icon" 
+                    class="me-2 text-white rounded-pill p-2 icon">
+                </i>
+                <span>
+                    {{ category.name }}
+                </span>
+    
+                <div class="position-absolute value">
+                    <small>
+                        {{ value.toLocaleString() }} Ft.
+                    </small>
+                </div>
+
+                <div class="position-absolute options">
+                    <i class="far fa-eye text-primary"
+                        role="button"
+                        title="Előzmények"
+                        data-bs-toggle="modal"
+                        [attr.data-bs-target]="'#history-' + category.id">
+                    </i>
+                    <ng-container *ngIf="!isDefault">
+                        <i class="far fa-edit text-warning ms-2" 
+                            role="button" 
+                            title="Szerkesztés"
+                            data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#edit-' + category.id">
+                        </i>
+
+                        <i class="far fa-trash-alt text-danger ms-2" 
+                            role="button" 
+                            title="Törlés"
+                            data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#delete-' + category.id">
+                        </i>
+                    </ng-container>
+                </div>
+            </div>
+    
+            <div class="progress" [title]="getPercantage()">
+                <div class="progress-bar progress-bar-striped"
+                    [ngStyle]="{'background-color': category.color, 'width': calculateWidth()}"
+                    role="progressbar">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rekord rögzítése -->
+    <cost-tracker-record-modal
+        (saveEmit)="saveEmit.emit(true)"
+        [id]="category.id"
+        [color]="category.color"
+        [title]="category.name"
+        [icon]="category.icon"
+    ></cost-tracker-record-modal>
+    
+    <!-- Kategória törlése -->
+    <cost-tracker-delete-category-modal
+        (deleteEventEmiter)="saveEmit.emit(true)"
+        [categoryId]="category.id"
+        [name]="category.name">
+    </cost-tracker-delete-category-modal>
+    
+    <!-- Kategória szerkesztése -->
+    <cost-tracker-category-modal
+        [category]="category"
+        (createEmit)="saveEmit.emit(true)"
+    ></cost-tracker-category-modal>
+
+    <!-- Rekordok előzményei -->
+    <cost-tracker-record-history-modal
+        [category]="category"
+        [records]="records">
+    </cost-tracker-record-history-modal>
+</div>

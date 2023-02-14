@@ -1,0 +1,48 @@
+<div class="modal fade" 
+    [id]="'history-' + category.id" 
+    data-bs-backdrop="static" 
+    data-bs-keyboard="false"
+    tabindex="-1" 
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-0">
+            <div class="modal-header" [ngStyle]="{'background': category.color}">
+                <h5 class="modal-title text-white">
+                    <i class="text-white me-2" [ngClass]="category.icon"></i>
+                    {{ category.name }} előzményei
+                </h5>
+            </div>
+            <div class="modal-body pb-0">
+                <table *ngIf="records.length" class="table table-hover">
+                    <!-- <thead>
+                        <tr>
+                            <th class="text-center bg-black text-white">Előzmények</th>
+                        </tr>
+                    </thead> -->
+                    <tbody>
+                        <tr *ngFor="let record of records.reverse()">
+                            <td>
+                                <strong>Dátum</strong>
+                                <span>{{ record.created | date: 'yyyy-MM-dd H:m:s' }}</span>
+                            </td>
+                            <td *ngIf="record.comment">
+                                <strong>Megjegyzés</strong>
+                                <span class="text-end">{{ record.comment }}</span>
+                            </td>
+                            <td>
+                                <strong>Érték</strong>
+                                <span>{{ record.value.toLocaleString() }} Ft.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p *ngIf="records.length === 0" class="text-center fst-italic fw-bold my-4">Nem található előzmény erre a hónapra!</p>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="w-100 btn bg-secondary text-white" data-bs-dismiss="modal">
+                    Bezár
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

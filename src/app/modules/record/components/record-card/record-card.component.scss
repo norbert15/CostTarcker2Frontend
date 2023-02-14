@@ -1,0 +1,33 @@
+.card {
+    max-width: 270px;
+    width: 100%;
+}
+
+.value {
+    right: 0%;
+    top: 20px;
+    font-size: 13px;
+}
+
+.icon {
+    text-align: center;
+    width: 35px;
+    height: 32px;
+}
+
+.shadow-card:hover {
+    box-shadow: 0 .5rem 1rem rgba(red, .175) !important;
+}
+
+.options {
+    i {
+       font-size: 12px;
+    }
+    
+    top: -15px;
+    right: -10px;
+}
+
+.progress-bar {
+    transition: 0.9s ease-in !important;
+}

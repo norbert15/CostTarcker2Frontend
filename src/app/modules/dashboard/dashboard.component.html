@@ -1,0 +1,36 @@
+<div>
+    <!-- Dashboard beállítások -->
+    <cost-tracker-dashboard-settings (periodChangeEmit)="ngOnInit()"></cost-tracker-dashboard-settings>
+    <!-- /Dashboard beállítások -->
+
+    <!-- Dashboard kártyák -->
+    <div class="row g-0 mx-2 my-3 ">
+        <cost-tracker-dashboard-card
+            *ngIf="dsService.isYearOn"
+            class="row g-0 col-12 col-lg"
+            [costName]="'Éves kiadás'"
+            [incomeName]="'Éves bevétel'"
+            [totalCost]="totalYearCost"
+            [totalIncomes]="totalYearIncomes">
+        </cost-tracker-dashboard-card>
+    
+        <cost-tracker-dashboard-card
+            *ngIf="dsService.isMonthlyOn"
+            class="row g-0 col-12 col-lg"
+            [costName]="'Havi kiadás'"
+            [incomeName]="'Havi bevétel'"
+            [totalCost]="currentMonthlyCost"
+            [totalIncomes]="currentMonthlyIncomes">
+        </cost-tracker-dashboard-card>
+    </div>
+    <!-- /Dashboard kártyák -->
+
+    <!-- Charts -->
+    <cost-tracker-dashboard-charts
+        [recordsWithCategories]="recordsWithCategories"
+        [incomesWithCategories]="incomesWithCategories"
+        [activeYearCost]="costRecordList"
+        [activeYearIncome]="incomeRecordList">
+    </cost-tracker-dashboard-charts>
+    <!-- /Charts -->
+</div>

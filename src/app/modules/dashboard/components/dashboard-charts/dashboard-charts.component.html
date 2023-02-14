@@ -1,0 +1,39 @@
+<div>
+    <div class="row g-0 my-3 mx-2">
+        <!-- BAR CHARTS -->
+        <ng-container *ngIf="dsService.isMonthlyOn">
+            <!-- Havi kimutatás -->
+            <ng-container *ngFor="let chart of monthlyBarChartOptions">
+                <div *ngIf="dsService.activeMonthlyCharts.includes(chart.record)" class="col-12 col-lg-6">
+                    <div class="card shadow border-0 mb-3 mx-2 p-0">
+                        <cost-tracker-basic-chart
+                            [title]="chart.name"
+                            [chartId]="chart.id"
+                            [type]="chart.type"
+                            [xAxisData]="chart.options.xAxis"
+                            [seriesData]="chart.options.seriesData">
+                        </cost-tracker-basic-chart>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="dsService.isYearOn">
+            <!-- Éves kimutatás -->
+            <ng-container *ngFor="let chart of yearlyBarChartOptions">
+                <div *ngIf="dsService.activeYearlyCharts.includes(chart.record) && chart.options.seriesData.length && chart.options.xAxis.length"  class="col-12 col-lg-6">
+                    <div class="card shadow border-0 mb-3 mx-2 p-0">
+                        <cost-tracker-basic-chart
+                            [title]="chart.name"
+                            [chartId]="chart.id"
+                            [type]="chart.type"
+                            [xAxisData]="chart.options.xAxis"
+                            [seriesData]="chart.options.seriesData">
+                        </cost-tracker-basic-chart>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <!-- /BAR CHARTS -->
+    </div>
+</div>

@@ -1,0 +1,28 @@
+hr {
+    width: 150px;
+}
+
+button {
+    margin-top: -3px;
+}
+
+.blue-hover:hover {
+    color: dodgerblue;
+    font-weight: bold;
+}
+
+.dodger-blue {
+    color: dodgerblue;
+}
+
+.month-container {
+    height: 122px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.month-container::-webkit-scrollbar {
+    display: none;
+}
