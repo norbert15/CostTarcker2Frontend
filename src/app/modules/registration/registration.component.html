@@ -22,15 +22,18 @@
                             class="form-control bg-light-grey" 
                             formControlName="email"
                             (input)="isEmailExists = false"
-                            [ngClass]="(isInvalid('email') && isTouched('email') || isEmailExists) ? 'border-danger' : 'border-0'">
-    
-                        <div *ngIf="formGroup.get('email')?.errors?.inValidEmail && isTouched('email')" class="text-danger text-end small">
+                            [ngClass]="(formValidatorService.isInvalid('email') && formValidatorService.isTouched('email') || isEmailExists) ? 'border-danger' : 'border-0'">
+                        
+                        <!-- E-mail cím error üzenetek -->
+                        <div *ngIf="formValidatorService.isInvalid('email') && formValidatorService.isTouched('email')" class="text-danger text-end small">
                             <small>*Az email cím helytelen formátumu!</small>
                         </div>
 
                         <div *ngIf="isEmailExists" class="text-danger text-end small">
                             <small>*Az e-mail cím már foglalt!</small>
                         </div>
+                        <!-- /E-mail cím error üzenetek -->
+
                     </div>
                     <!-- /E-amil cím mező -->
 
@@ -46,15 +49,18 @@
                             class="form-control bg-light-grey"
                             formControlName="username"
                             (input)="isUsernameExists = false"
-                            [ngClass]="(isMinLengthInvalid('username') && isTouched('username') || isUsernameExists) ? 'border-danger' : 'border-0'">
+                            [ngClass]="(formValidatorService.isInvalid('username') && formValidatorService.isTouched('username') || isUsernameExists) ? 'border-danger' : 'border-0'">
 
-                        <div *ngIf="isMinLengthInvalid('username') && isTouched('username')" class="text-danger text-end small">
+                        <!-- Felhasználónév error üzenetek -->
+                        <div *ngIf="formValidatorService.isInvalid('username') && formValidatorService.isTouched('username')" class="text-danger text-end small">
                             <small>*Minimum 5 karakter!</small>
                         </div>
 
                         <div *ngIf="isUsernameExists" class="text-danger text-end small">
                             <small>*A felhasználónév már foglalt!</small>
                         </div>
+                        <!-- /Felhasználónév error üzenetek -->
+
                     </div>
                     <!-- /Felhasználónév mező -->
 
@@ -69,11 +75,14 @@
                             id="lastName"
                             class="form-control bg-light-grey"
                             formControlName="lastName" 
-                            [ngClass]="isMinLengthInvalid('lastName') && isTouched('lastName') ? 'border-danger' : 'border-0'">
-    
-                        <div *ngIf="isMinLengthInvalid('lastName') && isTouched('lastName')" class="text-danger text-end small">
+                            [ngClass]="formValidatorService.isInvalid('lastName') && formValidatorService.isTouched('lastName') ? 'border-danger' : 'border-0'">
+                        
+                        <!-- Vezetéknév error üzenetek -->
+                        <div *ngIf="formValidatorService.isInvalid('lastName') && formValidatorService.isTouched('lastName')" class="text-danger text-end small">
                             <small>*Minimum 3 karakter!</small>
                         </div>
+                        <!-- /Vezetéknév error üzenetek -->
+
                     </div>
                     <!-- Vezetéknév mező -->
                     
@@ -88,11 +97,14 @@
                             id="firstName"
                             class="form-control bg-light-grey"
                             formControlName="firstName"
-                            [ngClass]="isMinLengthInvalid('firstName') && isTouched('firstName') ? 'border-danger' : 'border-0'">
-    
-                        <div *ngIf="isMinLengthInvalid('firstName') && isTouched('firstName')" class="text-danger text-end small">
+                            [ngClass]="formValidatorService.isInvalid('firstName') && formValidatorService.isTouched('firstName') ? 'border-danger' : 'border-0'">
+                        
+                        <!-- Keresztnév error üzenetek -->
+                        <div *ngIf="formValidatorService.isInvalid('firstName') && formValidatorService.isTouched('firstName')" class="text-danger text-end small">
                             <small>*Minimum 3 karakter!</small>
                         </div>
+                        <!-- /Keresztnév error üzenetek -->
+
                     </div>
                     <!-- /Keresztnév mező -->
 
@@ -107,13 +119,18 @@
                             id="password"
                             class="form-control bg-light-grey"
                             formControlName="password"
-                            [ngClass]="isMinLengthInvalid('password') && isTouched('password') ? 'border-danger' : 'border-0'">
+                            [ngClass]="formValidatorService.isInvalid('password') && formValidatorService.isTouched('password') ? 'border-danger' : 'border-0'">
 
-                        <div *ngIf="isMinLengthInvalid('password') && isTouched('password')" class="text-danger text-end small">
+                        <!-- Jelszó error üzenetek -->
+                        <div *ngIf="formValidatorService.isInvalid('password') && formValidatorService.isTouched('password')" class="text-danger text-end small">
                             <small>*Minimum 5 karakter!</small>
                         </div>
+                        <!-- /Jelszó error üzenetek -->
+
                     </div>
                     <!-- /Jelszó mező -->
+
+                    <!-- Jelszó megerősítése mező -->
                     <div class="col-12 col-sm-6 mb-3">
                         <label for="confirmPassword" class="form-label">
                             <i class="fas fa-lock me-1"></i>
@@ -124,20 +141,25 @@
                             id="confirmPassword"
                             class="form-control bg-light-grey"
                             formControlName="confirmPassword"
-                            [ngClass]="isMinLengthInvalid('confirmPassword') && isTouched('confirmPassword') ? 'border-danger' : 'border-0'">
+                            [ngClass]="formValidatorService.isInvalid('confirmPassword') && formValidatorService.isTouched('confirmPassword') ? 'border-danger' : 'border-0'">
 
-                        <div *ngIf="isTouched('confirmPassword')" class="text-danger text-end small">
-                            <small *ngIf="isMinLengthInvalid('confirmPassword')">*Minimum 5 karakter! <br/></small>
-                            <small *ngIf="formGroup.get('confirmPassword')!.errors?.notSamePassword">*A jelszavak nem egyeznek meg!</small>
+                        <!-- Jelszó megerősítési error üzenetek -->
+                        <div *ngIf="formValidatorService.isTouched('confirmPassword')" class="text-danger text-end small">
+                            <small *ngIf="formValidatorService.isInvalid('confirmPassword')">*Minimum 5 karakter! <br/></small>
+                            <small *ngIf="formValidatorService.isNotSamePassword('confirmPassword')">*A jelszavak nem egyeznek meg!</small>
                         </div>
+                        <!-- /Jelszó megerősítési error üzenetek -->
+
                     </div>
+                    <!-- /Jelszó megerősítése mező -->
                 </div>
 
+                <!-- Adatvédelmi nyilatkozat elfogadása -->
                 <div class="mt-3 mb-3 form-check">
                     <input (click)="isChecked = !isChecked" type="checkbox" id="data-guard" class="form-check-input me-2">
                     <label for="data-guard" class="form-check-label">Adatvédelmi nyilatkozat elfogadása</label>
-
                 </div>
+                <!-- /Adatvédelmi nyilatkozat elfogadása -->
                 
                 <p class="mb-4">Már van fiókod? Lépj be <a [routerLink]="'/login'">itt!</a></p>
 

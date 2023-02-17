@@ -1,6 +1,5 @@
 <div *ngIf="!category" class="card card-body" role="button" data-bs-toggle="modal" data-bs-target="#create-record">
     <div class="card-content">
-        <!-- <i class="fas fa-plus rounded-pill border-dark border p-2 me-2"></i> -->
         <i class="fas fa-plus-circle me-2"></i>
         <small>Új kategória létrehozása</small>
     </div>
@@ -39,8 +38,8 @@
                     <div class="mb-2">
                         <label for="type" class="form-label">Kategória tipusa</label>
                         <select id="type" class="form-select" formControlName="type">
-                            <option value="1" [attr.selected]="getCategoryTypeByUrl() == 1 ? true : null">Kiadás</option>
-                            <option value="2" [attr.selected]="getCategoryTypeByUrl() == 2 ? true : null">Bevétel</option>
+                            <option value="1" [attr.selected]="categoryType == 1 ? true : null">Kiadás</option>
+                            <option value="2" [attr.selected]="categoryType == 2 ? true : null">Bevétel</option>
                         </select>
                     </div>
                 </div>

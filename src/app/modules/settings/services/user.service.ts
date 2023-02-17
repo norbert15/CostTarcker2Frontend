@@ -16,11 +16,23 @@ export class UserService extends CrudService<UserType> {
     super(http, "users")
   }
 
+  /**
+   * Http PUT-os kérés küldése, mely során a felhasználói adatok szerkesztésre kerülnek
+   * 
+   * @param {UserType} profile felhasználói adatok 
+   * @returns {Observable<BaseResponseType<UserType>>} 
+   */
   updateProfileData(profile: UserType): Observable<BaseResponseType<UserType>> {
     return this.http.put(`${API_URL}/users/profile`, profile) as Observable<BaseResponseType<UserType>>;
   }
 
-  updatePasswordData(password: PasswordType) {
-    return this.http.put(`${API_URL}/users/password`, password);
+  /**
+   * Http PUT-os kérés küldése, mely során a felhasználó jelszava szerkesztésre kerülnek
+   * 
+   * @param {PasswordType} password  
+   * @returns {Observable<BaseResponseType<string>>}
+   */
+  updatePasswordData(password: PasswordType): Observable<BaseResponseType<string>> {
+    return this.http.put(`${API_URL}/users/password`, password) as Observable<BaseResponseType<string>>;
   }
 }

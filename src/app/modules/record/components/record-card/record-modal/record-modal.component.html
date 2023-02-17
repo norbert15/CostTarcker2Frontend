@@ -1,5 +1,5 @@
 <div class="modal fade" 
-    [id]="title + '-' + id" 
+    [id]="title + '-' + categoryId" 
     data-bs-backdrop="static" 
     data-bs-keyboard="false"
     tabindex="-1" 
@@ -19,7 +19,6 @@
                         type="number" 
                         max="1000000000" 
                         min="-1000000000"
-                        (input)="setUp($event)"
                         class="form-control bg-light-grey text-end"
                         [(ngModel)]="value">
                     <span class="input-group-text bg-white">Ft.</span>
@@ -38,7 +37,7 @@
                     Bezár
                 </button>
                 <button type="button" class="w-100 btn btn-success" data-bs-dismiss="modal"
-                    [disabled]="!isValidValue()" (click)="saveRecord()">
+                    [disabled]="value == 0" (click)="saveRecord()">
                     Rögzítés
                 </button>
             </div>

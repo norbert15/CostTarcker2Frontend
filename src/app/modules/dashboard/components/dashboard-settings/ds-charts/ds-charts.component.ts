@@ -8,11 +8,17 @@ import { DsMonthsService } from '../../../services/ds-months.service';
 })
 export class DsChartsComponent {
 
+  /**
+   * Chart tipusai
+   */
   chartTypes = [
     "Kiadás",
     "Bevétel"
   ];
 
+  /**
+   * Időszakok listája
+   */
   periods = [
     "Havi",
     "Éves"
@@ -20,6 +26,12 @@ export class DsChartsComponent {
 
   constructor(public dsService: DsMonthsService) { }
 
+  /**
+   * Aktiv éves vagy havi chartok megjelenítésének beállítása tipustól függöen
+   * 
+   * @param {string} type chart tipusa
+   * @param {string} period időszak 
+   */
   setType(type: string, period: string) {
     let items = period == "Éves" ? this.dsService.activeYearlyCharts : this.dsService.activeMonthlyCharts
     let index = items.indexOf(type);

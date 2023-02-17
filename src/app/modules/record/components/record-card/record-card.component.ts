@@ -9,37 +9,34 @@ import { RecordType } from 'src/app/shared/models/record.model';
 })
 export class RecordCardComponent {
 
+  /**
+   * Szülö komponensbe való visszaküldés rekord rögzítése során!
+   */
   @Output()
   saveEmit = new EventEmitter<boolean>();
 
-  @Input()
-  isDefault!: boolean;
-
+  /**
+   * Kategóriához tartozó rekordok értéke
+   */
   @Input()
   value!: number;
 
+  /**
+   * Rekordokat tartalmazó lista
+   */
   @Input()
   records: RecordType[] = [];
 
+  /**
+   * Összes rekord összérték
+   */
   @Input()
   sumValue!: number;
 
+  /**
+   * Kategória adatai, mely tartalmazza a hozzá tartozó színt, névt, ikont
+   */
   @Input()
   category!: CategoryType
-
-  isShow: boolean = false;
-
-  constructor() { }
-
-  calculateWidth() {
-    if (this.value == 0 || this.sumValue == 0) {
-      return "0%"
-    }
-
-    return `${(this.value / this.sumValue) * 100}%`
-  }
-
-  getPercantage(): string {
-    return Math.round(+this.calculateWidth().replace("%", "")) + "%";
-  }
+ 
 }

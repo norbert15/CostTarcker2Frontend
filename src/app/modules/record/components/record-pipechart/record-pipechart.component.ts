@@ -8,47 +8,77 @@ import * as echarts from 'echarts';
   templateUrl: './record-pipechart.component.html',
   styleUrls: ['./record-pipechart.component.scss']
 })
-export class RecordPipechartComponent implements AfterViewInit {
+export class RecordPipechartComponent {
 
+  /**
+   * Chart adatok beállítása
+   */
   @Input() set setChartData(data: RecorsdWithCategoryType[]) {
-    this.getChartData(data);
+    this.setChartSeriesDataAndColors(data);
     this.initChart();
   }
 
+  /**
+   * Chart adatok összegének beállítása
+   */
   @Input() set setSum(sum: number) {
     this.sum = sum;
   }
 
+  /**
+   * Chart adatok összege
+   */
   sum: number = 0;
 
+  /**
+   * Chart-hoz szükséges színek
+   */
   colors: string[] = [];
 
+  /**
+   * Chart
+   */
   chart!: echarts.ECharts;
 
+  /**
+   * Chart adatok listája
+   */
   chartData: any[] = [];
 
-  constructor(private elementRef: ElementRef, private changeDec: ChangeDetectorRef) {
-  }
+  constructor(
+    private elementRef: ElementRef, 
+    private changeDec: ChangeDetectorRef
+  ) { }
 
-  getChartData(data: RecorsdWithCategoryType[]) {
+  /**
+   * Chart-hoz szükséges adatok, színek beállítása
+   * 
+   * @param {RecorsdWithCategoryType[]} data chart adatok
+   */
+  setChartSeriesDataAndColors(records: RecorsdWithCategoryType[]): void {
     this.chartData = [];
     this.colors = [];
 
-    data.forEach(d => {
-      this.colors.push(d.category.color);
+    records.forEach((data: RecorsdWithCategoryType) => {
+      this.colors.push(data.category.color);
       this.chartData.push(
         {
-          value: d.sum,
-          name: d.category.name
+          value: data.sum,
+          name: data.category.name
         }
       )
     })
   }
 
+  /**
+   * Chart inicializálása
+   */
   initChart(): void {
     const container: HTMLDivElement = this.elementRef.nativeElement.querySelector('#pie-chart');
 
-    if (this.chart) this.chart.clear();
+    if (this.chart) {
+      this.chart.clear();
+    }
 
     if (container) {
       const chart = echarts.init(container);
@@ -82,9 +112,5 @@ export class RecordPipechartComponent implements AfterViewInit {
       chart.setOption(chartOption);
       this.chart = chart;
     }
-  }
-
-  ngAfterViewInit(): void {
-    this.changeDec.detectChanges();
   }
 }
