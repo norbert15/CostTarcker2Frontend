@@ -2,7 +2,7 @@
     <div class="text-center sidebar-header">
         {{ name }}
         <i class="show-close d-none text-white fas fa-times text-end fs-4" 
-            (click)="setupSidebarOnMobil()" role="button">
+            (click)="setUpSidebarOnMobil()" role="button">
         </i>
         <hr>
     </div>
@@ -12,7 +12,7 @@
             <a [routerLinkActive]="'fw-bold menu-active'"
                 [routerLink]="[menu.routerLink]"
                 [routerLinkActiveOptions]="{exact:true}"
-                (click)="setupSidebarOnMobil()"
+                (click)="setUpSidebarOnMobil()"
                 class="btn text-white-50">
                 {{ menu.name }}
             </a>

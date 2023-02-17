@@ -5,29 +5,23 @@
 
     <!-- Dashboard kártyák -->
     <div class="row g-0 mx-2 my-3 ">
-        <cost-tracker-dashboard-card
-            *ngIf="dsService.isYearOn"
-            class="row g-0 col-12 col-lg"
-            [costName]="'Éves kiadás'"
-            [incomeName]="'Éves bevétel'"
-            [totalCost]="totalYearCost"
-            [totalIncomes]="totalYearIncomes">
-        </cost-tracker-dashboard-card>
-    
-        <cost-tracker-dashboard-card
-            *ngIf="dsService.isMonthlyOn"
-            class="row g-0 col-12 col-lg"
-            [costName]="'Havi kiadás'"
-            [incomeName]="'Havi bevétel'"
-            [totalCost]="currentMonthlyCost"
-            [totalIncomes]="currentMonthlyIncomes">
-        </cost-tracker-dashboard-card>
+        <ng-container *ngFor="let card of cardList; let i = index;">
+            <cost-tracker-dashboard-card
+                *ngIf="card.isActive"
+                class="col-12 col-sm-6 col-md-6 col-lg"
+                [color]="card.type == 1 ? 'rgb(252, 3, 36)' : 'rgb(42, 150, 222)'"
+                [iconClass]="card.type == 1 ? 'fas fa-coins' : 'fas fa-credit-card'"
+                [name]="card.name"
+                [sum]="(i + 1) % 2 == 0 ? (cardList[i - 1].value + card.value) : cardList[i + 1].value"
+                [value]="card.value">
+            </cost-tracker-dashboard-card>
+        </ng-container>
     </div>
     <!-- /Dashboard kártyák -->
 
     <!-- Charts -->
     <cost-tracker-dashboard-charts
-        [recordsWithCategories]="recordsWithCategories"
+        [costWithCategories]="costWithCategories"
         [incomesWithCategories]="incomesWithCategories"
         [activeYearCost]="costRecordList"
         [activeYearIncome]="incomeRecordList">

@@ -1,29 +1,26 @@
-<div 
-    *ngFor="let card of cardList"
-    class="col-12 col-sm-6 col-md-6 col-lg">
-    <div class="card shadow border-0 mb-3 mx-2">
-        <div class="card-body">
-            <div class="mb-3 position-relative">
-                <i [ngStyle]="{'background': card.color}"
-                    [ngClass]="card.iconClass" 
-                    class="me-2 text-white rounded-pill p-2 icon">
-                </i>
-                <span>
-                    {{ card.name }}
-                </span>
-    
-                <div class="position-absolute value">
-                    <small>
-                        {{ card.value.toLocaleString() }} Ft.
-                    </small>
-                </div>
+<div class="card shadow border-0 mb-3 mx-2">
+    <div class="card-body">
+        <div class="mb-3 position-relative">
+            <i [ngStyle]="{'background': color}"
+                [ngClass]="iconClass" 
+                class="me-2 text-white rounded-pill p-2 icon">
+            </i>
+            <span>
+                {{ name }}
+            </span>
+
+            <div class="position-absolute value">
+                <small>
+                    {{ value.toLocaleString() }} Ft.
+                </small>
             </div>
-    
-            <div class="progress" [title]="haveIt(card.type)">
-                <div class="progress-bar progress-bar-striped"
-                    [ngStyle]="{'background-color': card.color, 'width': calculateWidth(card.type)}"
-                    role="progressbar">
-                </div>
+        </div>
+
+        <div class="progress">
+            <div *ngIf="sum > 0 && value > 0" class="progress-bar progress-bar-striped"
+                [barWidth]="[sum, value]"
+                [ngStyle]="{'background-color': color}"
+                role="progressbar">
             </div>
         </div>
     </div>

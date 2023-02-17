@@ -17,17 +17,20 @@ export class RecordComponent implements OnInit {
    */
   recordsWithCategories: RecorsdWithCategoryType[] = [];
 
+  /**
+   * Rekordok összértéke
+   */
   sum: number = 0;
 
-  constructor(public recordService: RecordService,
-              private changeDec: ChangeDetectorRef,
-              private dateService: DateService) {
-  }
+  constructor(
+    public recordService: RecordService,
+    private changeDec: ChangeDetectorRef,
+    private dateService: DateService
+  ) { }
 
-  ngOnInit(): void {
-    this.getRecords();
-  }
-
+  /**
+   * Rekordok lekérdezése a szerverről
+   */    
   getRecords(): void {
     this.recordService.getByPeriodAndType(this.dateService.getPeriod(), window.location.pathname.includes("cost") ? 1 : 2).subscribe(
       res => {
@@ -36,5 +39,12 @@ export class RecordComponent implements OnInit {
         this.changeDec.detectChanges();
       }
     )
+  }
+
+  /**
+   * OnInit
+   */
+  ngOnInit(): void {
+    this.getRecords();
   }
 }

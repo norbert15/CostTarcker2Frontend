@@ -11,11 +11,11 @@ import { FetchChartDataService } from '../../services/fetch-chart-data.service';
 })
 export class DashboardChartsComponent {
 
-  @Input() set recordsWithCategories(recordsWithCategories: RecorsdWithCategoryType[]) {
+  @Input() set costWithCategories(costWithCategories: RecorsdWithCategoryType[]) {
     [
       this.monthlyBarChartOptions[0].options.seriesData, 
       this.monthlyBarChartOptions[0].options.xAxis
-    ] = this.fetchChartDataService.fetchMonthlyChartData(recordsWithCategories);
+    ] = this.fetchChartDataService.fetchMonthlyChartData(costWithCategories);
   }
 
   @Input() set incomesWithCategories(incomesWithCategories: RecorsdWithCategoryType[]) {

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MONTH_COLORS_IN_HEX, MONTH_NAMES } from 'src/app/shared/commons/enums';
 import { RecordType, RecorsdWithCategoryType } from 'src/app/shared/models/record.model';
-import { SeriesType } from '../models/chart.model';
 import { DsMonthsService } from './ds-months.service';
 
 @Injectable({
@@ -11,6 +10,12 @@ export class FetchChartDataService {
 
   constructor(private dsService: DsMonthsService) { }
 
+  /**
+   * Chart-hoz szükséges (havi) series és xAxis adatok visszaadása egy listában
+   * 
+   * @param {RecorsdWithCategoryType[]} chartData rekordok kategóriákban csoportositva
+   * @returns chart adatok listája
+   */
   fetchMonthlyChartData(chartData: RecorsdWithCategoryType[]) {
     const seriesData: any[] = [];
     const xAxisData: string[] = [];
@@ -28,6 +33,12 @@ export class FetchChartDataService {
     return [seriesData, xAxisData];
   }
 
+  /**
+   * Chart-hoz szükséges (éves) series és xAxis adatok visszaadása egy listában
+   * 
+   * @param {RecordType[]} chartData rekordok adatai
+   * @returns chart adatok listája
+   */
   fetchYearlyChartData(chartData: RecordType[]) {
     const seriesData: any[] = [];
     const xAxisData: string[] = [];

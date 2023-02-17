@@ -28,7 +28,7 @@
                         data-bs-toggle="modal"
                         [attr.data-bs-target]="'#history-' + category.id">
                     </i>
-                    <ng-container *ngIf="!isDefault">
+                    <ng-container *ngIf="category.userId != 0">
                         <i class="far fa-edit text-warning ms-2" 
                             role="button" 
                             title="Szerkesztés"
@@ -46,9 +46,11 @@
                 </div>
             </div>
     
-            <div class="progress" [title]="getPercantage()">
-                <div class="progress-bar progress-bar-striped"
-                    [ngStyle]="{'background-color': category.color, 'width': calculateWidth()}"
+            <div class="progress">
+                <div 
+                    class="progress-bar progress-bar-striped"
+                    [barWidth]="[sumValue, value]"
+                    [ngStyle]="{'background-color': category.color}"
                     role="progressbar">
                 </div>
             </div>
@@ -58,7 +60,7 @@
     <!-- Rekord rögzítése -->
     <cost-tracker-record-modal
         (saveEmit)="saveEmit.emit(true)"
-        [id]="category.id"
+        [categoryId]="category.id"
         [color]="category.color"
         [title]="category.name"
         [icon]="category.icon"
@@ -74,7 +76,7 @@
     <!-- Kategória szerkesztése -->
     <cost-tracker-category-modal
         [category]="category"
-        (createEmit)="saveEmit.emit(true)"
+        (eventEmit)="saveEmit.emit(true)"
     ></cost-tracker-category-modal>
 
     <!-- Rekordok előzményei -->

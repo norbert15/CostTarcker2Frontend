@@ -17,17 +17,18 @@ export class PeriodChangerComponent implements OnInit {
   monthList: string[] = MONTH_NAMES;
 
   selectedMonthIndex!: number;
+
   selectedYear!: number;
 
   constructor(
     public dateService: DateService, 
     private elementRef: ElementRef, 
-    public dsService: DsMonthsService) { 
-    this.selectedMonthIndex = parseInt(formatDate(this.dateService.getPeriod(), "MM", "en")) - 1;
-    this.selectedYear = dateService.getActiveYear();
-  }
+    public dsService: DsMonthsService
+  ) {}
 
   ngOnInit(): void {
+    this.selectedMonthIndex = parseInt(formatDate(this.dateService.getPeriod(), "MM", "en")) - 1;
+    this.selectedYear = this.dateService.getActiveYear();
   }
 
   changePeriod(num: number): void {
@@ -66,8 +67,12 @@ export class PeriodChangerComponent implements OnInit {
   getPeriodChangerTitle(num: number): string {
     let index = parseInt(formatDate(this.dateService.getPeriod(), "MM", "en")) + num;
 
-    if (index == 13) index = 1;
-    if (index == 0) index = 12;
+    if (index == 13) {
+      index = 1;
+    }
+    if (index == 0) {
+      index = 12;
+    }
 
     return MONTH_NAMES[index - 1];
   }

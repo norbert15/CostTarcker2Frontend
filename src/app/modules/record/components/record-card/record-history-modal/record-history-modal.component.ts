@@ -7,18 +7,18 @@ import { RecordType } from 'src/app/shared/models/record.model';
   templateUrl: './record-history-modal.component.html',
   styleUrls: ['./record-history-modal.component.scss']
 })
-export class RecordHistoryModalComponent implements OnInit {
+export class RecordHistoryModalComponent {
 
+  /**
+   * Kategória adatai
+   */
   @Input()
   category!: CategoryType
 
+  /**
+   * Rekordokat tartalmazó lista
+   */
   @Input()
   records: RecordType[] = [];
-
-  constructor() { 
-  }
-
-  ngOnInit(): void {
-  }
 
 }

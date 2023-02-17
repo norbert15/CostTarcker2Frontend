@@ -7,6 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class RecordSumComponent {
 
+  /**
+   * Rekordok összege
+   */
   @Input()
   sum!: number;
 }

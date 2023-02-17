@@ -20,15 +20,18 @@
                         class="form-control bg-light-grey"
                         formControlName="email"
                         (input)="isEmailExists = false"
-                        [ngClass]="(isInvalid('email') || isEmailExists) ? 'border-danger' : 'border-0'">
+                        [ngClass]="(formValidatorService.isInvalid('email') || isEmailExists) ? 'border-danger' : 'border-0'">
 
-                    <div *ngIf="isInvalid('email')" class="text-end text-danger small">
+                    <!-- Email cím error üzenetek -->
+                    <div *ngIf="formValidatorService.isInvalid('email')" class="text-end text-danger small">
                         <small>*Az e-mail cím formátum helytelen!</small>
                     </div>
 
                     <div *ngIf="isEmailExists" class="text-end text-danger small">
                         <small>*Az e-mail cím már foglalt!</small>
                     </div>
+                    <!-- /Email cím error üzenetek -->
+
                 </div>
                 <!-- /E-mail cím -->
 
@@ -43,15 +46,18 @@
                         formControlName="username"
                         class="form-control bg-light-grey" 
                         (input)="isUsernameExists = false"
-                        [ngClass]="(isInvalid('username') || isUsernameExists) ? 'border-danger' : 'border-0'">
+                        [ngClass]="(formValidatorService.isInvalid('username') || isUsernameExists) ? 'border-danger' : 'border-0'">
 
-                    <div *ngIf="isInvalid('username')" class="text-end text-danger small">
+                    <!-- Felhasználónév error üzenetek -->
+                    <div *ngIf="formValidatorService.isInvalid('username')" class="text-end text-danger small">
                         <small>*Minimum 5 karakter!</small>
                     </div>
 
                     <div *ngIf="isUsernameExists" class="text-end text-danger small">
                         <small>*A felhasználónév már foglalt!</small>
                     </div>
+                    <!-- /Felhasználónév error üzenetek -->
+
                 </div>
                 <!-- /Felhasználónév -->
 
@@ -65,11 +71,14 @@
                         id="last-name" 
                         formControlName="lastName"
                         class="form-control bg-light-grey" 
-                        [ngClass]="isInvalid('lastName') ? 'border-danger' : 'border-0'">
+                        [ngClass]="formValidatorService.isInvalid('lastName') ? 'border-danger' : 'border-0'">
 
-                    <div *ngIf="isInvalid('lastName')" class="text-end text-danger small">
+                    <!-- Vezetéknév error üzenetek -->
+                    <div *ngIf="formValidatorService.isInvalid('lastName')" class="text-end text-danger small">
                         <small>*Minimum 3 karakter!</small>
                     </div>
+                    <!-- /Vezetéknév error üzenetek -->
+
                 </div>
                 <!-- /Vezetéknév -->
     
@@ -83,11 +92,14 @@
                         id="first-name" 
                         class="form-control bg-light-grey" 
                         formControlName="firstName"
-                        [ngClass]="isInvalid('firstName') ? 'border-danger' : 'border-0'">
+                        [ngClass]="formValidatorService.isInvalid('firstName') ? 'border-danger' : 'border-0'">
 
-                    <div *ngIf="isInvalid('firstName')" class="text-end text-danger small">
+                    <!-- Keresztnév error üzenetek -->
+                    <div *ngIf="formValidatorService.isInvalid('firstName')" class="text-end text-danger small">
                         <small>*Minimum 3 karakter!</small>
                     </div>
+                    <!-- /Keresztnév error üzenetek -->
+
                 </div>
                 <!-- /Keresztnév -->
             </div>

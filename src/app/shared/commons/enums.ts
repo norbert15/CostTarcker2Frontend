@@ -1,4 +1,5 @@
 import { formatDate } from "@angular/common";
+import { SidebarMenuType } from "../models/sidebar-menu.model";
 
 export const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -13,6 +14,25 @@ export enum RouterNames {
     DASHBOARD = "dashboard",
     REGISTRATION = "registration"
 };
+
+export const sideBarMenus: SidebarMenuType[] = [
+    {
+      name: "Kimutatások", 
+      routerLink: `${RouterNames.PROFILE}/${RouterNames.DASHBOARD}`
+    },
+    {
+      name: "Kiadások", 
+      routerLink: `${RouterNames.PROFILE}/${RouterNames.RECORDS}/${RouterNames.COST}`
+    },
+    {
+      name: "Bevételek", 
+      routerLink: `${RouterNames.PROFILE}/${RouterNames.RECORDS}/${RouterNames.INCOME}`
+    },
+    {
+      name: "Beállítások", 
+      routerLink: `${RouterNames.PROFILE}/${RouterNames.SETTINGS}`
+    }
+  ];
 
 
 export const MONTH_NAMES: string[] = [

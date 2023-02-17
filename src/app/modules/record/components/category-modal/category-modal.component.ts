@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'ngx-alerts';
 import { CategoryType } from 'src/app/shared/models/category.model';
+import { BaseResponseType } from 'src/app/shared/models/response.model';
 import { CategoryService } from 'src/app/shared/services/http/category.service';
 import { RecordService } from 'src/app/shared/services/http/record.service';
 
@@ -12,36 +13,60 @@ import { RecordService } from 'src/app/shared/services/http/record.service';
 })
 export class CategoryModalComponent implements OnInit {
 
+  /**
+   * Eseményekről való visszajelzés a szülő komponensbe
+   */
   @Output()
-  createEmit = new EventEmitter<boolean>();
+  eventEmit = new EventEmitter<boolean>();
 
-  categoryFormGroup!: FormGroup;
-
+  /**
+   * Kategória adatai ha szerkesztésre kerül sor
+   */
   @Input()
   category: CategoryType | undefined;
 
-  constructor(private recordService: RecordService, private categoryService: CategoryService, private alertService: AlertService) { 
-  }
+  /** 
+   * Kategória form
+   */
+  categoryFormGroup!: FormGroup;
 
+  /**
+   * Kategória tipusa
+   */
+  categoryType: number = 1;
+
+  constructor(
+    private recordService: RecordService, 
+    private categoryService: CategoryService, 
+    private alertService: AlertService
+  ) { }
+
+  /**
+   * Form inicializálása
+   */
   initForm(): void {
     this.categoryFormGroup = new FormGroup(
       {
         name: new FormControl(this.category ? this.category.name : null, Validators.required),
         icon: new FormControl(this.category ? this.category.icon : this.recordService.getActiveRecordIcon(), Validators.required),
         color: new FormControl(this.category ? this.category.color : "#000000", Validators.required),
-        type: new FormControl(this.category ? this.category.type : this.getCategoryTypeByUrl(), Validators.required)
+        type: new FormControl(this.category ? this.category.type : this.categoryType, Validators.required)
       }
     )
   }
 
-  ngOnInit(): void {
-    this.initForm();
-  }
-
+  /**
+   * Kategória tipusának visszaadása az url-ből
+   * 
+   * @returns {number} kategória tipusa
+   */
   getCategoryTypeByUrl(): number {
     return window.location.pathname.includes("cost") ? 1 : 2;
   }
 
+  /**
+   * Kategória mentése onSubmit-ra
+   */
   saveCategory(): void {
     this.categoryFormGroup.controls.icon.setValue(this.recordService.getActiveRecordIcon());
     if (this.categoryFormGroup.valid) {
@@ -49,12 +74,15 @@ export class CategoryModalComponent implements OnInit {
     }
   }
 
+  /**
+   * Kategória létrehozásának elinditása a szerver felé
+   */
   addCategory(): void {
     this.alertService.info("Új kategória létrehozása folyamatban...");
     this.categoryService.post(this.categoryFormGroup.getRawValue()).subscribe(
-      response => {
+      (response: BaseResponseType<CategoryType>) => {
         this.alertService.success("Sikeres létrehozás");
-        this.createEmit.emit(true)
+        this.eventEmit.emit(true)
         this.initForm();
       },
       error => {
@@ -63,12 +91,15 @@ export class CategoryModalComponent implements OnInit {
     )
   }
 
+  /**
+   * Kategória szerkesztésének elinditása a szerver felé
+   */
   editCategory(): void {
     this.alertService.info("Kategória szerkesztése folyamatban...");
     this.categoryService.put(this.category!.id, this.categoryFormGroup.getRawValue()).subscribe(
-      response => {
+      (response: BaseResponseType<CategoryType>) => {
         this.alertService.success("Sikeres kategória szerkesztés");
-        this.createEmit.emit(true)
+        this.eventEmit.emit(true)
         this.category = undefined;
         this.initForm();
       },
@@ -78,5 +109,13 @@ export class CategoryModalComponent implements OnInit {
         this.initForm();
       }
     )
+  }
+
+  /**
+   * OnInit, form inicializálása
+   */
+  ngOnInit(): void {
+    this.categoryType = this.getCategoryTypeByUrl();
+    this.initForm();
   }
 }

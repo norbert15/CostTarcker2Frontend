@@ -14,11 +14,10 @@
             [category]="data.category"
             [value]="data.sum"
             [sumValue]="sum"
-            [isDefault]="data.category.userId == 0"
             (saveEmit)="getRecords()"
             [records]="data.records">
         </cost-tracker-record-card>
-        <cost-tracker-category-modal (createEmit)="getRecords();" class="record-card col-12 col-sm-6 col-md-4 col-lg-4 m-2"></cost-tracker-category-modal>
+        <cost-tracker-category-modal (eventEmit)="getRecords();" class="record-card col-12 col-sm-6 col-md-4 col-lg-4 m-2"></cost-tracker-category-modal>
     </div>
     <!-- /Kategóriák listája -->
 

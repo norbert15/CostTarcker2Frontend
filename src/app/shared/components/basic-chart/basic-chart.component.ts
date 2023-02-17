@@ -8,44 +8,69 @@ import * as echarts from 'echarts';
 })
 export class BasicChartComponent implements OnInit, AfterViewInit, OnChanges {
 
+  /**
+   * Chart tipusa
+   */
   @Input()
   type!: string;
 
+  /**
+   * Chart azonosítója
+   */
   @Input()
   chartId!: string;
 
+  /**
+   * Charton megjelenő adatok
+   */
   @Input()
   seriesData: any[] = [];
 
+  /**
+   * X tengelyen lévő címkék
+   */
   @Input()
   xAxisData: string[] = [];
 
+  /**
+   * Chart címe
+   */
   @Input()
   title!: string;
 
+  /**
+   * Inicializáláshoz szükséges chart
+   */
   private chart!: echarts.ECharts;
 
   constructor(
     private elementRef: ElementRef
   ) { }
 
+  /**
+   * Chart adatok beállítása és visszaadása
+   * 
+   * @returns chart adatok
+   */
   getSeries() {
-    let series: any = {};
+    let series: any = {
+      type: this.type,
+      data: this.seriesData
+    };
 
     if (this.type == "bar") {
-      series["type"] = this.type;
-      series["data"] = this.seriesData;
       series["showBackground"] = true;
       series["backgroundStyle"] = {
         color: 'rgba(220, 220, 220, 0.8)'
       };
-    } else {
-      series = this.seriesData;
     }
 
     return series;
   }
 
+  /**
+   * Chart inicializálása
+   */
   initChart(): void {
     if (this.chart) this.chart.clear();
 

@@ -27,8 +27,14 @@ export class DsMonthsService {
    */
   activeYear: number = parseInt(formatDate(Date(), "yyyy", "en"));
 
+  /**
+   * Aktiv havi chartok
+   */
   activeMonthlyCharts: string[] = ["Bevétel", "Kiadás"];
 
+  /**
+   * Aktiv éves chartok
+   */
   activeYearlyCharts: string[] = ["Bevétel", "Kiadás"];
 
   constructor() { }

@@ -9,17 +9,32 @@ import { CategoryService } from 'src/app/shared/services/http/category.service';
 })
 export class DeleteCategoryModalComponent  {
 
+  /**
+   * Kategória azonosítója
+   */
   @Input()
   categoryId!: number;
 
+  /**
+   * Kategória neve
+   */
   @Input()
   name!: string;
 
+  /**
+   * Törlés után való visszajelzés a szülőkomponensbe
+   */
   @Output()
   deleteEventEmiter = new EventEmitter<boolean>();
 
-  constructor(private categoryService: CategoryService, private alertService: AlertService) { }
+  constructor(
+    private categoryService: CategoryService, 
+    private alertService: AlertService
+  ) { }
 
+  /**
+   * Kategória eltávlításának elinidtása a szerver felé
+   */
   deleteCategory(): void {
     this.alertService.info("A kategória törlése folyamataban...")
     this.categoryService.delete(this.categoryId).subscribe(

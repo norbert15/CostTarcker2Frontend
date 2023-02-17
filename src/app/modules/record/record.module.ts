@@ -15,6 +15,7 @@ import { RecordPipechartComponent } from './components/record-pipechart/record-p
 import { RecordSumComponent } from './components/record-sum/record-sum.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { OnHoverDirective } from './directives/on-hover.directive';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { OnHoverDirective } from './directives/on-hover.directive';
     FormsModule,
     ReactiveFormsModule,
     RecordRoutingModule,
+    SharedModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
