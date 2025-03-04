@@ -84,6 +84,6 @@ A program futtatáshoz szükséges telepíteni:
 
 - **Node.js 14.18.0-ás verziója**
 - **Angular CLI 12.2.0-ás verziója**
-- **Rest API telepítése: https://github.com/norbert15/cost-tracker2-backend**
+- **Rest API telepítése: https://github.com/norbert15/CostTracker2Backend**
 
 A telepített programok után a projekt fő könyvtárában telepíteni kell az alkalmazáshoz szükséges csomagokat: **npm install**
