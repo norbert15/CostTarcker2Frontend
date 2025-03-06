@@ -1,46 +1,59 @@
-<div class="modal fade" 
-    [id]="title + '-' + categoryId" 
-    data-bs-backdrop="static" 
-    data-bs-keyboard="false"
-    tabindex="-1" 
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content border-0">
-            <div class="modal-header" [ngStyle]="{'background': color}">
-                <h5 class="modal-title text-white">
-                    <i class="text-white me-2" [ngClass]="icon"></i>
-                    {{ title }}
-                </h5>
-            </div>
-            <div class="modal-body">
-                <div class="input-group mb-2">
-                    <span class="input-group-text bg-white">Összeg</span>
-                    <input 
-                        type="number" 
-                        max="1000000000" 
-                        min="-1000000000"
-                        class="form-control bg-light-grey text-end"
-                        [(ngModel)]="value">
-                    <span class="input-group-text bg-white">Ft.</span>
-                </div>
-                <div>
-                    <textarea 
-                        rows="2" 
-                        class="form-control" 
-                        placeholder="Megjegyzés"
-                        [(ngModel)]="comment">
-                    </textarea>
-                </div>
-            </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="w-100 btn bg-secondary text-white" data-bs-dismiss="modal">
-                    Bezár
-                </button>
-                <button type="button" class="w-100 btn btn-success" data-bs-dismiss="modal"
-                    [disabled]="value == 0" (click)="saveRecord()">
-                    Rögzítés
-                </button>
-            </div>
+<div
+  class="modal fade"
+  [id]="'category-' + categoryId"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content border-0">
+      <div class="modal-header" [ngStyle]="{ background: color }">
+        <h5 class="modal-title text-white">
+          <i class="text-white me-2" [ngClass]="icon"></i>
+          {{ title }}
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-2">
+          <span class="input-group-text bg-white">Összeg</span>
+          <input
+            type="number"
+            max="1000000000"
+            min="-1000000000"
+            class="form-control bg-light-grey text-end"
+            [(ngModel)]="value"
+          />
+          <span class="input-group-text bg-white">Ft.</span>
         </div>
+        <div>
+          <textarea
+            rows="2"
+            class="form-control"
+            placeholder="Megjegyzés"
+            [(ngModel)]="comment"
+          >
+          </textarea>
+        </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button
+          type="button"
+          class="w-100 btn bg-secondary text-white"
+          data-bs-dismiss="modal"
+        >
+          Bezár
+        </button>
+        <button
+          type="button"
+          class="w-100 btn btn-success"
+          data-bs-dismiss="modal"
+          [disabled]="value == 0"
+          (click)="saveRecord()"
+        >
+          Rögzítés
+        </button>
+      </div>
     </div>
+  </div>
 </div>
